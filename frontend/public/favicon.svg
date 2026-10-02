@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Background Shield / Hexagon -->
+  <rect width="64" height="64" rx="14" fill="#0A0E17"/>
+  <rect x="1" y="1" width="62" height="62" rx="13" stroke="#1F293D" stroke-width="2"/>
+  
+  <!-- Perspective Road -->
+  <path d="M14 52L26 22H38L50 52H14Z" fill="#111827" stroke="#374151" stroke-width="1.5"/>
+  
+  <!-- Road Center Dashes -->
+  <line x1="32" y1="26" x2="32" y2="32" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
+  <line x1="32" y1="36" x2="32" y2="44" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="32" y1="48" x2="32" y2="52" stroke="#F59E0B" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- AI / Network Grid Nodes -->
+  <circle cx="16" cy="18" r="3" fill="#06B6D4"/>
+  <circle cx="48" cy="18" r="3" fill="#06B6D4"/>
+  <circle cx="32" cy="10" r="3.5" fill="#3B82F6"/>
+  <line x1="16" y1="18" x2="32" y2="10" stroke="#06B6D4" stroke-width="1.5" stroke-dasharray="2 2" opacity="0.8"/>
+  <line x1="48" y1="18" x2="32" y2="10" stroke="#06B6D4" stroke-width="1.5" stroke-dasharray="2 2" opacity="0.8"/>
+
+  <!-- Location Pin / Sensor Head -->
+  <path d="M32 12C28.6863 12 26 14.6863 26 18C26 22.5 32 28 32 28C32 28 38 22.5 38 18C38 14.6863 35.3137 12 32 12Z" fill="#3B82F6"/>
+  <circle cx="32" cy="17.5" r="2" fill="#FFFFFF"/>
+
+  <!-- Detection Pulse Arc -->
+  <path d="M22 22C20 25 19 28 19 32" stroke="#06B6D4" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+  <path d="M42 22C44 25 45 28 45 32" stroke="#06B6D4" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+</svg>

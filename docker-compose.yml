@@ -1,0 +1,72 @@
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: arhdn-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - arhdn-network
+
+  ai-service:
+    build:
+      context: ./ai
+      dockerfile: Dockerfile
+    container_name: arhdn-ai
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - YOLO_MODEL_PATH=./models/best.pt
+      - YOLO_CONFIDENCE_THRESHOLD=0.40
+      - YOLO_IOU_THRESHOLD=0.45
+      - YOLO_DEVICE=cpu
+      - DEMO_MODE=true
+    volumes:
+      - ./ai/models:/app/models
+    networks:
+      - arhdn-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: arhdn-backend
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - NODE_ENV=production
+      - MONGO_URI=mongodb://mongodb:27017/arhdn
+      - JWT_SECRET=arhdn_production_secure_secret_key_928374
+      - CLIENT_URL=http://localhost:5173
+      - AI_SERVICE_URL=http://ai-service:8000
+      - DEMO_MODE=true
+    depends_on:
+      - mongodb
+      - ai-service
+    networks:
+      - arhdn-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: arhdn-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - arhdn-network
+
+volumes:
+  mongo_data:
+
+networks:
+  arhdn-network:
+    driver: bridge
